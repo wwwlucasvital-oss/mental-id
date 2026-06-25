@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Quiz de Perfil</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --text: #1f2937;
+            --bg-light: #f9fafb;
+            --border: #e5e7eb;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f3f4f6;
+            color: var(--text);
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .opcao-item {
+            display: inline-block;
+            margin-right: 15px;
+            margin-top: 10px;
+        }
+        .legenda-escala {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 8px;
+            margin-bottom: 25px;
+        }
+        .btn-calcular {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        #resultado-painel {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border);
+        }
+        .score-box {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        .perfil-badge {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <form id="quiz-form">
+        <!-- Exemplo de Pergunta 14 adaptada do seu código -->
+        <div>
+            <p><b>Pergunta 14:</b> Como você avalia seu nível de foco atual?</p>
+            <div class="opcao-item"><input type="radio" name="p14" id="p14_1" value="1" required><label for="p14_1">1</label></div>
+            <div class="opcao-item"><input type="radio" name="p14" id="p14_2" value="2"><label for="p14_2">2</label></div>
+            <div class="opcao-item"><input type="radio" name="p14" id="p14_3" value="3"><label for="p14_3">3</label></div>
+            <div class="opcao-item"><input type="radio" name="p14" id="p14_4" value="4"><label for="p14_4">4</label></div>
+            <div class="opcao-item"><input type="radio" name="p14" id="p14_5" value="5"><label for="p14_5">5</label></div>
+        </div>
+        <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
+
+        <button type="submit" class="btn-calcular">Calcular Meu Perfil</button>
+    </form>
+
+    <div id="resultado-painel">
+        <div class="resultado-header">
+            <h2>Seu Resultado Geral</h2>
+            <div class="score-box" id="score-text">0</div>
+            <span class="perfil-badge" id="perfil-badge">Aguardando respostas...</span>
+        </div>
+        
+        <div class="diagnostico-texto" id="diagnostico-texto" style="margin-top: 15px; font-weight: 500;">
+            Sua análise detalhada aparecerá aqui.
+        </div>
+
+        <div id="dimensoes-analise" style="margin-top: 25px; border-top: 1px solid var(--border); padding-top: 20px;">
+            <h3 style="font-size: 16px; color: var(--text); margin-bottom: 15px;">Análise por Dimensão e Sugestões Práticas:</h3>
+            <div id="lista-dimensoes"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('quiz-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const dimensoes = [
+        { 
+            nome: "Dimensão 1: Engajamento Reflexivo", 
+            perguntas:, // Adicione os números das outras perguntas aqui
+            pontos: 0, 
+            max: 5, // Altere baseado na quantidade de perguntas da dimensão (perguntas * 5)
+            sugestaoAlerta: "⚠️ <b>Foco em Reduzir a Ruminação:</b> Você tende a remoer pensamentos sem chegar a uma conclusão prática.",
+            sugestaoSucesso: "🌟 <b>Engajamento Reflexivo Positivo:</b> Excelente capacidade de refletir e analisar situações de forma produtiva."
+        }
+    ];
+
+    let pontuacaoTotal = 0;
+    let htmlDimensoes = '';
+
+    dimensoes.forEach(dimensao => {
+        let pointsDimensao = 0;
+        dimensao.perguntas.forEach(p => {
+            const elemento = document.querySelector(`input[name="p${p}"]:checked`);
+            if(elemento) pointsDimensao += parseInt(elemento.value);
+        });
+        dimensao.pontos = pointsDimensao;
+        pontuacaoTotal += pointsDimensao;
+
+        const mediaDimensao = dimensao.max / 2;
+        const textoSugestao = dimensao.pontos <= mediaDimensao ? dimensao.sugestaoAlerta : dimensao.sugestaoSucesso;
+
+        htmlDimensoes += `
+            <div style="margin-bottom: 20px; padding: 15px; background: var(--bg-light); border-radius: 8px;">
+                <h4 style="margin: 0 0 10px 0; color: var(--primary);">${dimensao.nome} (${dimensao.pontos}/${dimensao.max})</h4>
+                <p style="margin: 0; font-size: 14px; line-height: 1.5;">${textoSugestao}</p>
+            </div>
+        `;
+    });
+
+    let perfil = '';
+    let diagnostico = '';
+    
+    if (pontuacaoTotal <= 2) {
+        perfil = "Necessita Atenção";
+        diagnostico = "Sua pontuação indica que estratégias de desenvolvimento pessoal podem trazer grandes benefícios.";
+    } else if (pontuacaoTotal > 2 && pontuacaoTotal <= 4) {
+        perfil = "Em Equilíbrio";
+        diagnostico = "Você apresenta um bom equilíbrio geral, lidando bem com os desafios diários.";
+    } else {
+        perfil = "Excelente";
+        diagnostico = "Excelente nível de desenvolvimento! Você demonstra ótima capacidade de autogestão.";
+    }
+
+    document.getElementById('score-text').innerText = pontuacaoTotal;
+    document.getElementById('perfil-badge').innerText = perfil;
+    document.getElementById('diagnostico-texto').innerHTML = diagnostico;
+    document.getElementById('lista-dimensions' || 'lista-dimensoes').innerHTML = htmlDimensoes;
+});
+</script>
+</body>
+</html>
