@@ -1,23 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental ID - Análise de Perfil</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --text: #1f2937;
+            --bg-light: #f9fafb;
+            --border: #e5e7eb;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f3f4f6;
+            color: var(--text);
+            padding: 20px;
+        }
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .subtitulo {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .secao-titulo {
+            font-size: 18px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .pergunta-bloco {
+            margin-bottom: 25px;
+        }
+        .pergunta-texto {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        .opcoes-grupo {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+        }
+        .opcao-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        .opcao-item input {
+            cursor: pointer;
+        }
+        .legenda-escala {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 6px;
+        }
+        .btn-calcular {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: background 0.2s;
+        }
+        .btn-calcular:hover {
+            background: #4338ca;
+        }
+        #resultado-painel {
+            display: none;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 3px solid var(--primary);
+        }
+        .resultado-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .score-box {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        .perfil-badge {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 16px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .diagnostico-texto {
+            background: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .diagnostico-texto.atencao {
+            background: #fef2f2;
+            border-left-4px: solid #dc2626;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Mental ID</h1>
+    <p class="subtitulo">Responda às questões avaliando de 1 (Discordo Totalmente) a 5 (Concordo Totalmente)</p>
+
+    <form id="quiz-form">
+        
+        <!-- DIMENSÃO 1 -->
+        <div class="secao-titulo">Dimensão 1: Engajamento Reflexivo</div>
+        
+        <!-- Repetição de blocos de perguntas de 1 a 7 -->
+        <script>
+            const perguntasD1 = [
+                "Consigo analisar meus erros passados sem me culpar excessivamente.",
+                "Dedico tempo para entender a raiz dos meus sentimentos cotidianos.",
+                "Busco feedbacks de pessoas próximas para avaliar meu comportamento.",
+                "Quando enfrento um problema, reflito sobre soluções antes de agir por impulso.",
+                "Sei identificar quais gatilhos externos afetam minha produtividade.",
+                "Costumo avaliar se minhas metas de vida ainda fazem sentido para mim.",
+                "Consigo separar o que é um pensamento lógico de uma preocupação irracional."
+            ];
+            
+            perguntasD1.forEach((texto, index) => {
+                const num = index + 1;
+                document.write(`
+                    <div class="pergunta-bloco">
+                        <div class="pergunta-texto">Pergunta ${num}: ${texto}</div>
+                        <div class="opcoes-grupo">
+                            ${[1,2,3,4,5].map(v => `
+                                <div class="opcao-item">
+                                    <input type="radio" name="p${num}" id="p${num}_${v}" value="${v}" required>
+                                    <label for="p${num}_${v}">${v}</label>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
+                    </div>
+                `);
+            });
+        </script>
+
+        <!-- DIMENSÃO 2 -->
+        <div class="secao-titulo">Dimensão 2: Regulação Emocional</div>
+        
+        <!-- Repetição de blocos de perguntas de 8 a 14 -->
+        <script>
+            const perguntasD2 = [
+                "Em momentos de estresse intenso, consigo me acalmar rapidamente.",
+                "Não deixo que uma frustração matinal estrague o resto do meu dia.",
+                "Consigo expressar minha raiva ou insatisfação de forma pacífica e clara.",
+                "Mantenho a paciência mesmo quando as coisas saem do meu controle.",
+                "Uso técnicas (como respiração ou pausas) para lidar com a ansiedade.",
+                "Consigo tolerar críticas profissionais sem levar para o lado pessoal.",
+                "Como você avalia seu nível de foco atual em momentos de pressão?" // Sua Pergunta 14 original
+            ];
+            
+            perguntasD2.forEach((texto, index) => {
+                const num = index + 8;
+                document.write(`
+                    <div class="pergunta-bloco">
+                        <div class="pergunta-texto">Pergunta ${num}: ${texto}</div>
+                        <div class="opcoes-grupo">
+                            ${[1,2,3,4,5].map(v => `
+                                <div class="opcao-item">
+                                    <input type="radio" name="p${num}" id="p${num}_${v}" value="${v}" required>
+                                    <label for="p${num}_${v}">${v}</label>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
+                    </div>
+                `);
+            });
+        </script>
+
+        <button type="submit" class="btn-calcular">Calcular Meu Perfil</button>
+    </form>
+
+    <!-- PAINEL DE RESULTADOS -->
+    <div id="resultado-painel">
+        <div class="resultado-header">
+            <h2>Seu Resultado Geral</h2>
+            <div class="score-box" id="score-text">0</div>
+            <span class="perfil-badge" id="perfil-badge">Calculando...</span>
+        </div>
+        
+        <div class="diagnostico-texto" id="diagnostico-texto">
+            Sua análise aparecerá aqui.
+        </div>
+
+        <div id="dimensoes-analise" style="margin-top: 25px; border-top: 1px solid var(--border); padding-top: 20px;">
+            <h3 style="font-size: 16px; color: var(--text); margin-bottom: 15px;">Análise por Dimensão e Sugestões Práticas:</h3>
+            <div id="lista-dimensoes"></div>
+        </div>
+    </div>
+</div>
+
 <script>
 document.getElementById('quiz-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Mapeamento corrigido e limpo
+    // Configuração oficial para as 14 perguntas (7 para cada dimensão)
+    // Máximo de pontos por dimensão: 7 perguntas * 5 pontos = 35 pontos
     const dimensoes = [
         { 
             nome: "Dimensão 1: Engajamento Reflexivo", 
-            perguntas: [14], // Adicionado o número 14 para testar com a sua pergunta atual
+            perguntas: [1, 2, 3, 4, 5, 6, 7], 
             pontos: 0, 
-            max: 5,
-            sugestaoAlerta: "⚠️ <b>Foco em Reduzir a Ruminação:</b> Você tende a remoer pensamentos sem chegar a uma conclusão prática.",
-            sugestaoSucesso: "🌟 <b>Engajamento Reflexivo Positivo:</b> Excelente capacidade de refletir e analisar situações sem cair na ruminação improdutiva."
+            max: 35,
+            sugestaoAlerta: "⚠️ <b>Foco em Reduzir a Ruminação:</b> Suas respostas indicam uma tendência a remoer pensamentos sem caminhar para resoluções práticas. Experimente estipular prazos para tomar decisões.",
+            sugestaoSucesso: "🌟 <b>Engajamento Reflexivo Positivo:</b> Excelente capacidade de autoanálise! Você consegue avaliar suas ações e pensamentos de forma madura e construtiva."
+        },
+        { 
+            nome: "Dimensão 2: Regulação Emocional", 
+            perguntas: [8, 9, 10, 11, 12, 13, 14], 
+            pontos: 0, 
+            max: 35,
+            sugestaoAlerta: "⚠️ <b>Apoio na Regulação Emocional:</b> Momentos de estresse podem desestabilizar seu foco com facilidade. Adote pequenas pausas estratégicas e exercícios de respiração diafragmática.",
+            sugestaoSucesso: "🌟 <b>Regulação Emocional Saudável:</b> Você demonstra grande resiliência e estabilidade em cenários de pressão, modulando bem o seu humor."
         }
     ];
 
     let pontuacaoTotal = 0;
     let htmlDimensoes = '';
 
-    // Processa a pontuação
     dimensoes.forEach(dimensao => {
         let pontosDimensao = 0;
         dimensao.perguntas.forEach(p => {
@@ -25,41 +262,3 @@ document.getElementById('quiz-form').addEventListener('submit', function(e) {
             if (elemento) {
                 pontosDimensao += parseInt(elemento.value);
             }
-        });
-        dimensao.pontos = pontosDimensao;
-        pontuacaoTotal += pontosDimensao;
-
-        // Limiar de 50% da dimensão
-        const mediaDimensao = dimensao.max / 2;
-        const textoSugestao = dimensao.pontos <= mediaDimensao ? dimensao.sugestaoAlerta : dimensao.sugestaoSucesso;
-
-        htmlDimensoes += `
-            <div style="margin-bottom: 20px; padding: 15px; background: var(--bg-light); border-radius: 8px;">
-                <h4 style="margin: 0 0 10px 0; color: var(--primary);">${dimensao.nome} (${dimensao.pontos}/${dimensao.max})</h4>
-                <p style="margin: 0; font-size: 14px; line-height: 1.5;">${textoSugestao}</p>
-            </div>
-        `;
-    });
-
-    // Define perfil e mensagem geral com base no total (Ajustado para o teste de 1 pergunta)
-    let perfil = '';
-    let diagnostico = '';
-    
-    if (pontuacaoTotal <= 2) {
-        perfil = "Necessita Atenção";
-        diagnostico = "Sua pontuação indica um momento em que estratégias de desenvolvimento pessoal e regulação podem trazer grandes benefícios.";
-    } else if (pontuacaoTotal > 2 && pontuacaoTotal <= 4) {
-        perfil = "Em Equilíbrio";
-        diagnostico = "Você apresenta um bom equilíbrio geral, lidando de maneira satisfatória com os desafios diários.";
-    } else {
-        perfil = "Excelente";
-        diagnostico = "Excelente nível de desenvolvimento! Você demonstra ótima capacidade de autogestão e inteligência emocional.";
-    }
-
-    // Exibe os resultados na tela
-    document.getElementById('score-text').innerText = pontuacaoTotal;
-    document.getElementById('perfil-badge').innerText = perfil;
-    document.getElementById('diagnostico-texto').innerHTML = diagnostico;
-    document.getElementById('lista-dimensoes').innerHTML = htmlDimensoes;
-});
-</script>
