@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mental ID - Análise de Perfil</title>
+    <title>Mental ID - Avaliação de Perfil</title>
     <style>
         :root {
             --primary: #4f46e5;
@@ -28,8 +28,8 @@
         h1 {
             font-size: 24px;
             color: var(--primary);
-            margin-bottom: 5px;
             text-align: center;
+            margin-bottom: 5px;
         }
         .subtitulo {
             text-align: center;
@@ -90,10 +90,6 @@
             cursor: pointer;
             width: 100%;
             margin-top: 20px;
-            transition: background 0.2s;
-        }
-        .btn-calcular:hover {
-            background: #4338ca;
         }
         #resultado-painel {
             display: none;
@@ -139,13 +135,12 @@
 
 <div class="container">
     <h1>Mental ID</h1>
-    <p class="subtitulo">Responda às questões avaliando de 1 (Discordo Totalmente) a 5 (Concordo Totalmente)</p>
+    <p class="subtitulo">Responda avaliando de 1 (Discordo Totalmente) a 5 (Concordo Totalmente)</p>
 
     <form id="quiz-form">
         
         <div class="secao-titulo">Dimensão 1: Engajamento Reflexivo</div>
         
-        <!-- P1 -->
         <div class="pergunta-bloco">
             <div class="pergunta-texto">Pergunta 1: Consigo analisar meus erros passados sem me culpar excessivamente.</div>
             <div class="opcoes-grupo">
@@ -158,7 +153,6 @@
             <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
         </div>
 
-        <!-- P2 -->
         <div class="pergunta-bloco">
             <div class="pergunta-texto">Pergunta 2: Dedico tempo para entender a raiz dos meus sentimentos cotidianos.</div>
             <div class="opcoes-grupo">
@@ -171,7 +165,6 @@
             <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
         </div>
 
-        <!-- P3 -->
         <div class="pergunta-bloco">
             <div class="pergunta-texto">Pergunta 3: Busco feedbacks de pessoas próximas para avaliar meu comportamento.</div>
             <div class="opcoes-grupo">
@@ -184,9 +177,8 @@
             <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
         </div>
 
-        <!-- P4 -->
         <div class="pergunta-bloco">
-            <div class="pergunta-texto">Pergunta 4: Quando enfrento um problem, reflito sobre soluções antes de agir por impulso.</div>
+            <div class="pergunta-texto">Pergunta 4: Quando enfrento um problema, reflito sobre soluções antes de agir por impulso.</div>
             <div class="opcoes-grupo">
                 <div class="opcao-item"><input type="radio" name="p4" id="p4_1" value="1" required><label for="p4_1">1</label></div>
                 <div class="opcao-item"><input type="radio" name="p4" id="p4_2" value="2"><label for="p4_2">2</label></div>
@@ -197,9 +189,8 @@
             <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
         </div>
 
-        <!-- P5 -->
         <div class="pergunta-bloco">
-            <div class="pergunta-texto">Pergunta 5: Sei identificar quais gatilhos externos afetam minha produtividade.</div>
+            <div class="pergunta-texto">Pergunta 5: Como você avalia seu nível de foco atual em momentos de pressão?</div>
             <div class="opcoes-grupo">
                 <div class="opcao-item"><input type="radio" name="p5" id="p5_1" value="1" required><label for="p5_1">1</label></div>
                 <div class="opcao-item"><input type="radio" name="p5" id="p5_2" value="2"><label for="p5_2">2</label></div>
@@ -210,13 +201,23 @@
             <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
         </div>
 
-        <!-- P6 -->
-        <div class="pergunta-bloco">
-            <div class="pergunta-texto">Pergunta 6: Costumo avaliar se minhas metas de vida ainda fazem sentido para mim.</div>
-            <div class="opcoes-grupo">
-                <div class="opcao-item"><input type="radio" name="p6" id="p6_1" value="1" required><label for="p6_1">1</label></div>
-                <div class="opcao-item"><input type="radio" name="p6" id="p6_2" value="2"><label for="p6_2">2</label></div>
-                <div class="opcao-item"><input type="radio" name="p6" id="p6_3" value="3"><label for="p6_3">3</label></div>
-                <div class="opcao-item"><input type="radio" name="p6" id="p6_4" value="4"><label for="p6_4">4</label></div>
-                <div class="opcao-item"><input type="radio" name="p6" id="p6_5" value="5"><label for="p6_5">5</label></div>
-            </div>
+        <button type="submit" class="btn-calcular">Calcular Meu Perfil</button>
+    </form>
+
+    <div id="resultado-painel">
+        <div class="resultado-header">
+            <h2>Seu Resultado Geral</h2>
+            <div class="score-box" id="score-text">0</div>
+            <span class="perfil-badge" id="perfil-badge">Calculando...</span>
+        </div>
+        
+        <div class="diagnostico-texto" id="diagnostico-texto">
+            Sua análise aparecerá aqui.
+        </div>
+    </div>
+</div>
+
+<!-- Vinculação do arquivo de lógica -->
+<script src="script.js"></script>
+</body>
+</html>
