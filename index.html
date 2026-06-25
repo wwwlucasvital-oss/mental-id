@@ -143,126 +143,80 @@
 
     <form id="quiz-form">
         
-        <!-- DIMENSÃO 1 -->
         <div class="secao-titulo">Dimensão 1: Engajamento Reflexivo</div>
-        <div id="container-d1"></div>
-
-        <!-- DIMENSÃO 2 -->
-        <div class="secao-titulo">Dimensão 2: Regulação Emocional</div>
-        <div id="container-d2"></div>
-
-        <button type="submit" class="btn-calcular">Calcular Meu Perfil</button>
-    </form>
-
-    <!-- PAINEL DE RESULTADOS -->
-    <div id="resultado-painel">
-        <div class="resultado-header">
-            <h2>Seu Resultado Geral</h2>
-            <div class="score-box" id="score-text">0</div>
-            <span class="perfil-badge" id="perfil-badge">Calculando...</span>
-        </div>
         
-        <div class="diagnostico-texto" id="diagnostico-texto">
-            Sua análise aparecerá aqui.
-        </div>
-
-        <div id="dimensoes-analise" style="margin-top: 25px; border-top: 1px solid var(--border); padding-top: 20px;">
-            <h3 style="font-size: 16px; color: var(--text); margin-bottom: 15px;">Análise por Dimensão e Sugestões Práticas:</h3>
-            <div id="lista-dimensoes"></div>
-        </div>
-    </div>
-</div>
-
-<script>
-// Listas de perguntas nativas em Javascript puro
-const perguntasD1 = [
-    "Consigo analisar meus erros passados sem me culpar excessivamente.",
-    "Dedico tempo para entender a raiz dos meus sentimentos cotidianos.",
-    "Busco feedbacks de pessoas próximas para avaliar meu comportamento.",
-    "Quando enfrento um problema, reflito sobre soluções antes de agir por impulso.",
-    "Sei identificar quais gatilhos externos afetam minha produtividade.",
-    "Costumo avaliar se minhas metas de vida ainda fazem sentido para mim.",
-    "Consigo separar o que é um pensamento lógico de uma preocupação irracional."
-];
-
-const perguntasD2 = [
-    "Em momentos de estresse intenso, consigo me acalmar rapidamente.",
-    "Não deixo que uma frustração matinal estrague o resto do meu dia.",
-    "Consigo expressar minha raiva ou insatisfação de forma pacífica e clara.",
-    "Mantenho a paciência mesmo quando as coisas saem do meu controle.",
-    "Uso técnicas (como respiração ou pausas) para lidar com a ansiedade.",
-    "Consigo tolerar críticas profissionais sem levar para o lado pessoal.",
-    "Como você avalia seu nível de foco atual em momentos de pressão?"
-];
-
-// Função para renderizar as perguntas na tela de forma segura
-function renderizarPerguntas(perguntas, containerId, iniciarNoNumero) {
-    const container = document.getElementById(containerId);
-    let htmlHTML = '';
-    
-    perguntas.forEach((texto, index) => {
-        const num = iniciarNoNumero + index;
-        htmlHTML += `
-            <div class="pergunta-bloco">
-                <div class="pergunta-texto">Pergunta ${num}: ${texto}</div>
-                <div class="opcoes-grupo">
-                    <div class="opcao-item"><input type="radio" name="p${num}" id="p${num}_1" value="1" required><label for="p${num}_1">1</label></div>
-                    <div class="opcao-item"><input type="radio" name="p${num}" id="p${num}_2" value="2" required><label for="p${num}_2">2</label></div>
-                    <div class="opcao-item"><input type="radio" name="p${num}" id="p${num}_3" value="3" required><label for="p${num}_3">3</label></div>
-                    <div class="opcao-item"><input type="radio" name="p${num}" id="p${num}_4" value="4" required><label for="p${num}_4">4</label></div>
-                    <div class="opcao-item"><input type="radio" name="p${num}" id="p${num}_5" value="5" required><label for="p${num}_5">5</label></div>
-                </div>
-                <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
+        <!-- P1 -->
+        <div class="pergunta-bloco">
+            <div class="pergunta-texto">Pergunta 1: Consigo analisar meus erros passados sem me culpar excessivamente.</div>
+            <div class="opcoes-grupo">
+                <div class="opcao-item"><input type="radio" name="p1" id="p1_1" value="1" required><label for="p1_1">1</label></div>
+                <div class="opcao-item"><input type="radio" name="p1" id="p1_2" value="2"><label for="p1_2">2</label></div>
+                <div class="opcao-item"><input type="radio" name="p1" id="p1_3" value="3"><label for="p1_3">3</label></div>
+                <div class="opcao-item"><input type="radio" name="p1" id="p1_4" value="4"><label for="p1_4">4</label></div>
+                <div class="opcao-item"><input type="radio" name="p1" id="p1_5" value="5"><label for="p1_5">5</label></div>
             </div>
-        `;
-    });
-    container.innerHTML = htmlHTML;
-}
+            <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
+        </div>
 
-// Executa a montagem visual das perguntas assim que a página carrega
-renderizarPerguntas(perguntasD1, 'container-d1', 1);
-renderizarPerguntas(perguntasD2, 'container-d2', 8);
+        <!-- P2 -->
+        <div class="pergunta-bloco">
+            <div class="pergunta-texto">Pergunta 2: Dedico tempo para entender a raiz dos meus sentimentos cotidianos.</div>
+            <div class="opcoes-grupo">
+                <div class="opcao-item"><input type="radio" name="p2" id="p2_1" value="1" required><label for="p2_1">1</label></div>
+                <div class="opcao-item"><input type="radio" name="p2" id="p2_2" value="2"><label for="p2_2">2</label></div>
+                <div class="opcao-item"><input type="radio" name="p2" id="p2_3" value="3"><label for="p2_3">3</label></div>
+                <div class="opcao-item"><input type="radio" name="p2" id="p2_4" value="4"><label for="p2_4">4</label></div>
+                <div class="opcao-item"><input type="radio" name="p2" id="p2_5" value="5"><label for="p2_5">5</label></div>
+            </div>
+            <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
+        </div>
 
-// Lógica de cálculo do formulário
-document.getElementById('quiz-form').addEventListener('submit', function(e) {
-    e.preventDefault();
+        <!-- P3 -->
+        <div class="pergunta-bloco">
+            <div class="pergunta-texto">Pergunta 3: Busco feedbacks de pessoas próximas para avaliar meu comportamento.</div>
+            <div class="opcoes-grupo">
+                <div class="opcao-item"><input type="radio" name="p3" id="p3_1" value="1" required><label for="p3_1">1</label></div>
+                <div class="opcao-item"><input type="radio" name="p3" id="p3_2" value="2"><label for="p3_2">2</label></div>
+                <div class="opcao-item"><input type="radio" name="p3" id="p3_3" value="3"><label for="p3_3">3</label></div>
+                <div class="opcao-item"><input type="radio" name="p3" id="p3_4" value="4"><label for="p3_4">4</label></div>
+                <div class="opcao-item"><input type="radio" name="p3" id="p3_5" value="5"><label for="p3_5">5</label></div>
+            </div>
+            <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
+        </div>
 
-    // Mapeamento correto das duas dimensões (7 perguntas por bloco, máx 35 pontos cada)
-    const dimensoes = [
-        { 
-            nome: "Dimensão 1: Engajamento Reflexivo", 
-            perguntas:, 
-            pontos: 0, 
-            max: 35,
-            sugestaoAlerta: "⚠️ <b>Foco em Reduzir a Ruminação:</b> Suas respostas indicam uma tendência a remoer pensamentos sem caminhar para resoluções práticas. Experimente estipular prazos objetivos para tomar decisões.",
-            sugestaoSucesso: "🌟 <b>Engajamento Reflexivo Positivo:</b> Excelente capacidade de autoanálise! Você consegue avaliar suas ações e pensamentos de forma madura e construtiva."
-        },
-        { 
-            nome: "Dimensão 2: Regulação Emocional", 
-            perguntas:, 
-            pontos: 0, 
-            max: 35,
-            sugestaoAlerta: "⚠️ <b>Apoio na Regulação Emocional:</b> Momentos de estresse desestabilizam seu foco com facilidade. Adote pequenas pausas estratégicas e exercícios simples de respiração na sua rotina.",
-            sugestaoSucesso: "🌟 <b>Regulação Emocional Saudável:</b> Você demonstra grande resiliência e estabilidade em cenários de pressão, modulando muito bem o seu humor."
-        }
-    ];
+        <!-- P4 -->
+        <div class="pergunta-bloco">
+            <div class="pergunta-texto">Pergunta 4: Quando enfrento um problem, reflito sobre soluções antes de agir por impulso.</div>
+            <div class="opcoes-grupo">
+                <div class="opcao-item"><input type="radio" name="p4" id="p4_1" value="1" required><label for="p4_1">1</label></div>
+                <div class="opcao-item"><input type="radio" name="p4" id="p4_2" value="2"><label for="p4_2">2</label></div>
+                <div class="opcao-item"><input type="radio" name="p4" id="p4_3" value="3"><label for="p4_3">3</label></div>
+                <div class="opcao-item"><input type="radio" name="p4" id="p4_4" value="4"><label for="p4_4">4</label></div>
+                <div class="opcao-item"><input type="radio" name="p4" id="p4_5" value="5"><label for="p4_5">5</label></div>
+            </div>
+            <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
+        </div>
 
-    let pontuacaoTotal = 0;
-    let htmlDimensoes = '';
+        <!-- P5 -->
+        <div class="pergunta-bloco">
+            <div class="pergunta-texto">Pergunta 5: Sei identificar quais gatilhos externos afetam minha produtividade.</div>
+            <div class="opcoes-grupo">
+                <div class="opcao-item"><input type="radio" name="p5" id="p5_1" value="1" required><label for="p5_1">1</label></div>
+                <div class="opcao-item"><input type="radio" name="p5" id="p5_2" value="2"><label for="p5_2">2</label></div>
+                <div class="opcao-item"><input type="radio" name="p5" id="p5_3" value="3"><label for="p5_3">3</label></div>
+                <div class="opcao-item"><input type="radio" name="p5" id="p5_4" value="4"><label for="p5_4">4</label></div>
+                <div class="opcao-item"><input type="radio" name="p5" id="p5_5" value="5"><label for="p5_5">5</label></div>
+            </div>
+            <div class="legenda-escala"><span>Discordo Totalmente</span><span>Concordo Totalmente</span></div>
+        </div>
 
-    dimensoes.forEach(dimensao => {
-        let pontosDimensao = 0;
-        dimensao.perguntas.forEach(p => {
-            const elemento = document.querySelector(`input[name="p${p}"]:checked`);
-            if (elemento) {
-                pontosDimensao += parseInt(elemento.value);
-            }
-        });
-        dimensao.pontos = pontosDimensao;
-        pontuacaoTotal += pontosDimensao;
-
-        // Corte de média na metade da pontuação máxima da dimensão (17.5)
-        const mediaDimensao = dimensao.max / 2;
-        const textoSugestao = dimensao.pontos <= mediaDimensao ? dimensao.sugestaoAlerta : dimensao.sugestaoSucesso;
-
-        htmlDimensoes += `
+        <!-- P6 -->
+        <div class="pergunta-bloco">
+            <div class="pergunta-texto">Pergunta 6: Costumo avaliar se minhas metas de vida ainda fazem sentido para mim.</div>
+            <div class="opcoes-grupo">
+                <div class="opcao-item"><input type="radio" name="p6" id="p6_1" value="1" required><label for="p6_1">1</label></div>
+                <div class="opcao-item"><input type="radio" name="p6" id="p6_2" value="2"><label for="p6_2">2</label></div>
+                <div class="opcao-item"><input type="radio" name="p6" id="p6_3" value="3"><label for="p6_3">3</label></div>
+                <div class="opcao-item"><input type="radio" name="p6" id="p6_4" value="4"><label for="p6_4">4</label></div>
+                <div class="opcao-item"><input type="radio" name="p6" id="p6_5" value="5"><label for="p6_5">5</label></div>
+            </div>
